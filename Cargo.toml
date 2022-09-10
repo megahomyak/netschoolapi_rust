@@ -1,0 +1,17 @@
+[package]
+name = "netschoolapi_rust"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+async-trait = "0.1.57"
+concat_strs = "1.0.2"
+encoding = "0.2.33"
+md5 = "0.7.0"
+num = { version = "0.4.0", features = ["num-bigint", "serde"] }
+reqwest = { version = "0.11.11", features = ["cookies", "json"] }
+serde = { version = "1.0.144", features = ["derive"] }
+serde_json = { version = "1.0.85", features = ["arbitrary_precision"] }
+url = "2.2.2"
