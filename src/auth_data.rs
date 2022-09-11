@@ -1,4 +1,4 @@
-use crate::net_school_clients::inactive_client::SchoolInfo;
+use crate::schemas::SchoolInfo;
 
 pub struct AuthData<Username, Password> {
     pub username: Username,
