@@ -1,5 +1,3 @@
-use std::borrow::Borrow;
-
 use crate::{
     user_data::UserData,
     web_clients::{logged_in_web_client::LoggedInWebClient, web_client_wrapper::WebClientWrapper},
@@ -13,7 +11,7 @@ pub struct LoggedInClient<Username, Password> {
     web_client: WebClientWrapper<LoggedInWebClient>,
 }
 
-impl<Username: Borrow<str>, Password: Borrow<str>> LoggedInClient<Username, Password> {
+impl<Username, Password> LoggedInClient<Username, Password> {
     pub const fn new(
         user_data: UserData<Username, Password>,
         web_client: WebClientWrapper<LoggedInWebClient>,
@@ -23,8 +21,11 @@ impl<Username: Borrow<str>, Password: Borrow<str>> LoggedInClient<Username, Pass
             web_client,
         }
     }
+}
 
-    pub fn log_out(self) -> LoggedOutClient<Username, Password> {
+impl<Username: Send, Password: Send> LoggedInClient<Username, Password> {
+    pub async fn log_out(self) -> LoggedOutClient<Username, Password> {
+        drop(self.web_client.post("auth/logout").unwrap().send().await);
         LoggedOutClient::new(
             self.user_data,
             WebClientWrapper::new(self.web_client.into_inner().log_out()),
