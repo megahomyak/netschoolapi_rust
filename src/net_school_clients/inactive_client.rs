@@ -171,6 +171,10 @@ impl<Username, Password> InactiveClient<Username, Password> {
             web_client,
         }
     }
+
+    pub fn set_auth_data(&mut self, auth_data: AuthData<Username, Password>) {
+        self.auth_data = auth_data;
+    }
 }
 
 impl<Username: Borrow<str> + Send + Sync, Password: Borrow<str> + Send + Sync>
