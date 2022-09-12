@@ -3,6 +3,8 @@ use super::{
     web_client_trait::{RequestError, WebClient},
 };
 
+/// Wraps the web client to provide the necessary methods.
+/// Not made as a default trait method so it cannot be overridden.
 pub struct WebClientWrapper<Inner>(Inner);
 
 impl<Inner: WebClient> WebClientWrapper<Inner> {
