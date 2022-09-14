@@ -5,7 +5,7 @@ use num::BigInt;
 use crate::{
     auth_data::AuthData,
     schemas::{Assignment, CurrentYear, DiaryInfo},
-    web_clients::{logged_in_web_client::LoggedInWebClient, web_client_wrapper::WebClientWrapper},
+    web_clients::{logged_in_web_client::LoggedInWebClient, web_client_wrapper::WebClientWrapper, request_sender::RequestSender},
 };
 
 pub struct UserData<Username, Password> {
@@ -22,8 +22,8 @@ pub enum MakingError {
 }
 
 impl<Username: Send, Password: Send> UserData<Username, Password> {
-    pub async fn make(
-        web_client: &WebClientWrapper<LoggedInWebClient>,
+    pub async fn make<R: RequestSender>(
+        web_client: &WebClientWrapper<LoggedInWebClient, R>,
         auth_data: AuthData<Username, Password>,
     ) -> Result<Self, (MakingError, AuthData<Username, Password>)> {
         macro_rules! error {
@@ -107,7 +107,9 @@ impl<Username, Password> UserData<Username, Password> {
     }
 }
 
-impl<Username, Password> From<UserData<Username, Password>> for AuthData<Username, Password> {
+impl<Username, Password> From<UserData<Username, Password>>
+    for AuthData<Username, Password>
+{
     fn from(user_data: UserData<Username, Password>) -> Self {
         user_data.auth_data
     }

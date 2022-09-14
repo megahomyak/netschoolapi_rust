@@ -15,9 +15,9 @@ use crate::{
 use super::logged_in_client::LoggedInClient;
 
 /// A client that was never logged in.
-pub struct InactiveClient<Username, Password> {
+pub struct InactiveClient<Username, Password, RequestSender> {
     auth_data: AuthData<Username, Password>,
-    web_client: WebClientWrapper<LoggedOutWebClient>,
+    web_client: WebClientWrapper<LoggedOutWebClient, RequestSender>,
 }
 
 pub enum AuthError {
@@ -57,10 +57,10 @@ impl From<SchoolsGettingError> for SchoolByNameGettingError {
     }
 }
 
-impl<Username, Password> InactiveClient<Username, Password> {
+impl<Username, Password, RequestSender> InactiveClient<Username, Password, RequestSender> {
     pub const fn new(
         auth_data: AuthData<Username, Password>,
-        web_client: WebClientWrapper<LoggedOutWebClient>,
+        web_client: WebClientWrapper<LoggedOutWebClient, RequestSender>,
     ) -> Self {
         Self {
             auth_data,
@@ -73,8 +73,8 @@ impl<Username, Password> InactiveClient<Username, Password> {
     }
 }
 
-impl<Username: Borrow<str> + Send + Sync, Password: Borrow<str> + Send + Sync>
-    InactiveClient<Username, Password>
+impl<Username: Borrow<str> + Send + Sync, Password: Borrow<str> + Send + Sync, RequestSender>
+    InactiveClient<Username, Password, RequestSender>
 {
     pub async fn schools(&self) -> Result<Vec<SchoolInfo>, SchoolsGettingError> {
         let schools: Vec<SchoolInfo> = match self

@@ -14,6 +14,27 @@ dependencies = [
 ]
 
 [[package]]
+name = "async_t"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e30aed4f50f73b54afcd7b52e36bc08ed979b3d46373972f08db1fa46d637eaa"
+dependencies = [
+ "async-trait",
+ "async_t_internal",
+]
+
+[[package]]
+name = "async_t_internal"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0d9e28b7cb50c0fe8ae2e6986529d62be1a6e025626b940fef7ae5f8d295520a"
+dependencies = [
+ "proc-macro-error",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "autocfg"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -498,7 +519,7 @@ dependencies = [
 name = "netschoolapi_rust"
 version = "0.1.0"
 dependencies = [
- "async-trait",
+ "async_t",
  "concat_strs",
  "encoding",
  "md5",
@@ -671,6 +692,30 @@ name = "pkg-config"
 version = "0.3.25"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1df8c4ec4b0627e53bdf214615ad287367e482558cf84b109250b37464dc03ae"
+
+[[package]]
+name = "proc-macro-error"
+version = "1.0.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "da25490ff9892aab3fcf7c36f08cfb902dd3e71ca0f9f9517bea02a73a5ce38c"
+dependencies = [
+ "proc-macro-error-attr",
+ "proc-macro2",
+ "quote",
+ "syn",
+ "version_check",
+]
+
+[[package]]
+name = "proc-macro-error-attr"
+version = "1.0.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a1be40180e52ecc98ad80b184934baf3d0d29f979574e439af5a55274b35f869"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "version_check",
+]
 
 [[package]]
 name = "proc-macro-hack"
