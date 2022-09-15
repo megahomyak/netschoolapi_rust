@@ -1,3 +1,5 @@
+**Development is frozen unless I will need the thing**
+
 Known flaws
 ===========
 
