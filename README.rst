@@ -1,4 +1,4 @@
-**Development is frozen unless I will need the thing**
+**The development is frozen unless I will need the thing**
 
 Known flaws
 ===========
