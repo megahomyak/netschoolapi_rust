@@ -1,6 +1,6 @@
 **The development is frozen unless I will need the thing**
 
-**One issue was found: salt should not be passed to the `login` endpoint**
+**One issue was found: salt should not be passed to the `login` endpoint** (upd: why did I write this? Is it really an issue?)
 
 Known flaws
 ===========
